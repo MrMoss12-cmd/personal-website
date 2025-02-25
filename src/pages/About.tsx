@@ -1,6 +1,6 @@
 import { FC } from 'react'
 import SkillCard from '../components/SkillCard'
-import { skills, getSkillsByCategory } from '../data/skills'
+import { getSkillsByCategory } from '../data/skills'
 
 const About: FC = () => {
   // Get frontend skills first, as they're usually most relevant
@@ -44,6 +44,7 @@ const About: FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {allSkills.map((skill) => (
             <SkillCard
+              category={skill.category}
               key={skill.id}
               title={skill.title}
               icon={skill.icon}
