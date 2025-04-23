@@ -56,20 +56,20 @@ const ParticlesBackground: FC = () => {
           },
           move: {
             enable: true,
-            speed: 2.5,  // Slightly increased speed
+            speed: 2.5,
             direction: "none",
-            random: true,  // Changed to true for more random movement
+            random: true,
             straight: false,
             outModes: {
-              default: "bounce"  // Changed from "out" to "bounce" to keep particles in view
+              default: "bounce"
             },
             attract: {
-              enable: true,  // Enable attraction but with very low force
+              enable: true,
               rotateX: 1200,
-              rotateY: 1200,
-              factor: 0.2  // Low attraction factor
+              rotateY: 1200
+              // Removed the 'factor' property as it's not part of the type
             }
-          }
+          },
         },
         interactivity: {
           events: {
