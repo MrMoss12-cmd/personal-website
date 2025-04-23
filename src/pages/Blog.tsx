@@ -1,14 +1,44 @@
-import { FC } from 'react'
+import { FC, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { posts } from '../data/posts'
 
 const Blog: FC = () => {
+  // Get unique tags from all posts
+  const allTags = ['All', ...new Set(
+    posts.flatMap(post => post.tags)
+  )]
+  const [activeFilter, setActiveFilter] = useState('All')
+
+  const filteredPosts = activeFilter === 'All'
+    ? posts
+    : posts.filter(post => 
+        post.tags.includes(activeFilter)
+      )
+
   return (
     <div className="container mx-auto px-4 py-16">
-      <h1 className="text-4xl font-bold text-center mb-12">Blog</h1>
+      <h1 className="text-4xl font-bold mb-3 text-center">Blog</h1>
+      <p className="text-sm text-gray-600 mb-12 text-center">Blogs by category</p>
+      
+      {/* Tag filters */}
+      <div className="flex flex-wrap justify-center gap-4 mb-12">
+        {allTags.map((tag) => (
+          <button
+            key={tag}
+            onClick={() => setActiveFilter(tag)}
+            className={`px-6 py-2 rounded-full transition-all duration-300 ${
+              activeFilter === tag
+                ? 'bg-blue-500 text-white shadow-lg'
+                : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
+            }`}
+          >
+            {tag}
+          </button>
+        ))}
+      </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {posts.map((post) => (
+        {filteredPosts.map((post) => (
           <article 
             key={post.id} 
             className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow"
@@ -50,6 +80,13 @@ const Blog: FC = () => {
           </article>
         ))}
       </div>
+
+      {/* No results message */}
+      {filteredPosts.length === 0 && (
+        <div className="text-center text-gray-400 mt-12">
+          No blog posts found in this category.
+        </div>
+      )}
     </div>
   )
 }

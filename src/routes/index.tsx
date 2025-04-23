@@ -2,7 +2,7 @@ import { createBrowserRouter, Outlet } from 'react-router-dom';
 import Home from '../pages/Home';
 import About from '../pages/About';
 import Portfolio from '../pages/Portfolio';
-import Blog from '../pages/Blog';
+//import Blog from '../pages/Blog';
 import Contact from '../pages/Contact';
 import BlogPost from '../pages/BlogPost';
 import Header from '../components/Header';
@@ -40,10 +40,11 @@ const router = createBrowserRouter([
         element: <Portfolio />,
       },
    
-      {
+    /*  {
         path: '/blog',
         element: <Blog />,
       },
+      */
           
       {
         path: '/blog/:id',
