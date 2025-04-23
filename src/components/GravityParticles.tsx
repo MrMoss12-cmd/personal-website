@@ -270,41 +270,20 @@ const GravityParticles: FC = () => {
     }
 
     // Initialize
-    const MAX_PARTICLES = 100;
     const particles: Particle[] = [];
     const gravities: GravityPoint[] = [];
+    // Initialize mouse state
     let mousePoint = new Vector();
-    let isMouseDown = false;
-
-    // Create particles
-    for (let i = 0; i < MAX_PARTICLES; i++) {
-      const particle = new Particle(
-        Math.random() * canvas.width,
-        Math.random() * canvas.height,
-        Math.random() * 1.5 + 0.5,
-        gravities
-      );
-      
-      // Añadir velocidad inicial aleatoria para que las partículas se muevan
-      particle._speed.set(
-        (Math.random() - 0.5) * 2,
-        (Math.random() - 0.5) * 2
-      );
-      
-      particles.push(particle);
-    }
-
+    
     // Mouse events
     canvas.addEventListener('mousedown', function(e) {
       mousePoint.set(e.clientX, e.clientY);
-      isMouseDown = true;
       
       const gravity = new GravityPoint(
         e.clientX, e.clientY, 
-        40, // Aumentado el radio para mayor visibilidad
+        40,
         { particles, gravities }
       );
-      // Aumentamos la gravedad para un efecto más fuerte
       gravity.gravity = 0.08;
       gravities.push(gravity);
     });
@@ -314,7 +293,8 @@ const GravityParticles: FC = () => {
     });
 
     canvas.addEventListener('mouseup', function(e) {
-      isMouseDown = false;
+      // Optionally use the event if needed
+      console.log('Mouse up at:', e.clientX, e.clientY);
     });
 
     // Touch events for mobile
@@ -323,7 +303,6 @@ const GravityParticles: FC = () => {
       if (e.touches.length > 0) {
         const touch = e.touches[0];
         mousePoint.set(touch.clientX, touch.clientY);
-        isMouseDown = true;
         
         const gravity = new GravityPoint(
           touch.clientX, touch.clientY, 
@@ -345,7 +324,6 @@ const GravityParticles: FC = () => {
 
     canvas.addEventListener('touchend', function(e) {
       e.preventDefault();
-      isMouseDown = false;
     });
 
     // Animation loop
