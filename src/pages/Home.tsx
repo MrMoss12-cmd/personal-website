@@ -39,13 +39,13 @@ const Home: FC = () => {
             </div>
             <div className="space-x-4">
               <a 
-                href="/portfolio" 
+                href="https://eliashigueraacosta.netlify.app/portfolio" 
                 className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-lg transition-colors"
               >
                 View My Work
               </a>
               <a 
-                href="/contact" 
+                href="https://eliashigueraacosta.netlify.app/contact" 
                 className="border border-blue-500 hover:bg-blue-500 text-white px-6 py-3 rounded-lg transition-colors"
               >
                 Contact Me
